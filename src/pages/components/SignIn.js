@@ -33,13 +33,17 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  button: {
+    backgroundColor: "#f44336",
+    color: "white",
+  },
 }));
 
 const SignIn = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userInfo, logInError, loading } = useSelector((state) => state.auth);
+  const { token, logInError, loading } = useSelector((state) => state.auth);
 
   const [signinData, setSigninData] = useState({
     email: "",
@@ -66,25 +70,10 @@ const SignIn = () => {
   }, [logInError]);
 
   useEffect(() => {
-    if (userInfo) {
+    if (token) {
       navigate("/home");
     }
-  }, [userInfo, navigate]);
-
-  // async function handleLogin(e) {
-  //   e.preventDefault();
-  //   console.log(loginData);
-  //   let result = await fetch("https://tf-practical.herokuapp.com/api/login/", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(loginData),
-  //   });
-  //   result = await result.json();
-  //   localStorage.setItem("user-info", JSON.stringify(result));
-  //   navigate("/home");
-  // }
+  }, [token, navigate]);
 
   return (
     <Grid>
@@ -106,6 +95,7 @@ const SignIn = () => {
       <form onSubmit={handleSigninSubmit}>
         <TextField
           className={classes.margin}
+          type="email"
           label="Email"
           id="email"
           name="email"
@@ -138,7 +128,7 @@ const SignIn = () => {
           }}
         />
         <Box textAlign="center">
-          <Button className={classes.typo} variant="contained" type="submit">
+          <Button className={classes.button} variant="contained" type="submit">
             SIGN IN
           </Button>
         </Box>

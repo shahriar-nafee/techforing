@@ -22,12 +22,12 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
+  // title: {
+  //   display: "none",
+  //   [theme.breakpoints.up("sm")]: {
+  //     display: "block",
+  //   },
+  // },
 
   sectionDesktop: {
     display: "none",
@@ -135,8 +135,8 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+          <Typography variant="h6" noWrap>
+            TechForing
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

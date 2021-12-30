@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   border: {
     backgroundColor: "light",
-    boxShadow: "0 3px 5px 2px rgba(244, 112, 166, 0.77)",
+    boxShadow: "0 3px 5px 2px rgba(243, 41, 44, 0.74)",
   },
   paper: {
     textAlign: "center",

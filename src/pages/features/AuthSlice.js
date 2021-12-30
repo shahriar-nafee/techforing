@@ -20,6 +20,14 @@ export const loginUser = createAsyncThunk("loginuser", async (data) => {
 
   return res;
 });
+export const signupUser = createAsyncThunk("signupUser", async (data) => {
+  const res = await axios.post(
+    "https://tf-practical.herokuapp.com/api/register/",
+    data
+  );
+
+  return res;
+});
 
 const AuthSlice = createSlice({
   name: "auth",
@@ -44,13 +52,34 @@ const AuthSlice = createSlice({
       }
       localStorage.setItem("token", JSON.stringify(state.token));
     },
+    [signupUser.fulfilled]: (state, action) => {
+      const { data } = action.payload;
+      state.loading = false;
+      state.signUpError = "";
+      state.message =
+        "Registration successful. Now sign in to enter the job portal";
+      if (data) {
+        state.userInfo = data;
+      }
+    },
     [loginUser.pending]: (state) => {
       state.loading = true;
       state.logInError = "";
     },
+    [signupUser.pending]: (state) => {
+      state.loading = true;
+      state.signUpError = "";
+      state.message = "";
+    },
     [loginUser.rejected]: (state) => {
       state.loading = false;
       state.logInError = "Invalid User name or Password";
+      state.message = "";
+    },
+    [signupUser.rejected]: (state) => {
+      state.loading = false;
+      state.signUpError =
+        "Failed to create an account (password must contain at least 8 characters and a combination of letter,number or symbols)";
       state.message = "";
     },
   },
