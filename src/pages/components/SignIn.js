@@ -12,7 +12,7 @@ import Mail from "@material-ui/icons/Mail";
 import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { loginUser } from "../features/AuthSlice";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ const SignIn = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, logInError, loading } = useSelector((state) => state.auth);
+  const { token, logInError } = useSelector((state) => state.auth);
 
   const [signinData, setSigninData] = useState({
     email: "",

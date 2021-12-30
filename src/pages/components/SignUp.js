@@ -114,7 +114,7 @@ function SignUp() {
         confirmPassword: "",
       });
     }
-  }, [signUpError, message]);
+  }, [signUpError, message, success]);
 
   useEffect(() => {
     setWarning("");

@@ -6,7 +6,7 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import { AppBar, Grid, Paper, Typography } from "@material-ui/core";
+import { AppBar, Grid, Typography } from "@material-ui/core";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -113,6 +113,7 @@ export default function Login() {
               height="80%"
               width="60%"
               src="https://techforing.com/tfimg/logo.png"
+              alt="logo"
             />
             <Typography className={classes.imgTitle} variant="subtitle1">
               Shaping Tomorrow's Cybersecurity
