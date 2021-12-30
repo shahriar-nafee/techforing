@@ -4,16 +4,15 @@ import { useGetAllJobsQuery } from "../features/JoblistApi";
 import {
   Box,
   Button,
-  createTheme,
   LinearProgress,
   makeStyles,
   Modal,
-  ThemeProvider,
   Typography,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { green } from "@material-ui/core/colors";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -24,25 +23,19 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   button: {
-    margin: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
   createButton: {
     textAlign: "right",
   },
 }));
 
-const theme = createTheme({
-  palette: {
-    primary: green,
-  },
-});
-
 const columns = [
   {
     field: "jobTitle",
     headerName: "Post Name",
     // width: 150,
-    flex: 1,
+    flex: 1.5,
   },
   {
     field: "jobType",
@@ -87,20 +80,38 @@ const columns = [
     flex: 1,
     disableClickEventBubbling: true,
     renderCell: () => {
-      return <Button variant="contained" startIcon={<EditIcon />}></Button>;
+      return (
+        <>
+          {" "}
+          <Button>
+            <EditIcon
+              style={{
+                color: "green",
+              }}
+            />
+          </Button>
+          <Button
+            startIcon={
+              <DeleteIcon
+                style={{
+                  color: "red",
+                }}
+              />
+            }
+          ></Button>
+          <Button
+            startIcon={
+              <VisibilityIcon
+                style={{
+                  color: "DodgerBlue	",
+                }}
+              />
+            }
+          ></Button>
+        </>
+      );
     },
   },
-  // {
-  //   field: "jobType",
-  //   headerName: "Type",
-  //   description: "This column has a value getter and is not sortable.",
-  //   sortable: false,
-  //   width: 160,
-  //   valueGetter: (params) =>
-  //     `${params.getValue(params.id, "firstName") || ""} ${
-  //       params.getValue(params.id, "lastName") || ""
-  //     }`,
-  // },
 ];
 
 export default function DataTable() {
@@ -123,20 +134,22 @@ export default function DataTable() {
           RECENT JOB POST
         </Typography>
       </Box>
-      {isLoading && <LinearProgress />}
+
       <Box className={classes.createButton}>
-        <ThemeProvider theme={theme}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={handleOpen}
-            startIcon={<AddCircleIcon />}
-          >
-            Create Job
-          </Button>
-        </ThemeProvider>
+        <Button
+          style={{
+            backgroundColor: "green",
+          }}
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={handleOpen}
+          startIcon={<AddCircleIcon />}
+        >
+          Create Job
+        </Button>
       </Box>
+      {isLoading && <LinearProgress />}
       <Modal
         open={open}
         onClose={handleClose}

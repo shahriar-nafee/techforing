@@ -9,8 +9,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import HomeIcon from "@material-ui/icons/Home";
 import WorkIcon from "@material-ui/icons/Work";
 import GroupIcon from "@material-ui/icons/Group";
-import JobList from "./JobList";
-
+import { Outlet, Link } from "react-router-dom";
 const drawerWidth = 60;
 
 const useStyles = makeStyles((theme) => ({
@@ -49,24 +48,26 @@ export default function ClippedDrawer() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button>
-              <HomeIcon />
+            <ListItem button component={Link} to={"/portal/home"}>
+              <HomeIcon style={{ color: "#063970" }} />
             </ListItem>
-            <ListItem button>
-              <WorkIcon />
+
+            <ListItem button component={Link} to={"/portal/jobs"}>
+              <WorkIcon style={{ color: "#063970" }} />
             </ListItem>
-            <ListItem button>
-              <GroupIcon />
+
+            <ListItem button component={Link} to={"/portal/users"}>
+              <GroupIcon style={{ color: "#063970" }} />
             </ListItem>
-            <ListItem button>
-              <MailIcon />
+            <ListItem button component={Link} to={"/portal/mails"}>
+              <MailIcon style={{ color: "#063970" }} />
             </ListItem>
           </List>
         </div>
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <JobList />
+        <Outlet />
       </main>
     </div>
   );

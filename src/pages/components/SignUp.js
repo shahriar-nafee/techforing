@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   button: {
-    backgroundColor: "#f44336",
+    backgroundColor: "#063970",
     color: "white",
     marginTop: theme.spacing(3),
   },

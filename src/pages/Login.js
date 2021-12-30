@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   border: {
     backgroundColor: "light",
-    boxShadow: "0 3px 5px 2px rgba(243, 41, 44, 0.74)",
+    boxShadow: "0 1px 2px 1px #063970",
   },
   paper: {
     textAlign: "center",
@@ -95,6 +95,11 @@ export default function Login() {
               aria-label="simple tabs example"
               // className={classes.paper}
               variant="fullWidth"
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: "#063970",
+                },
+              }}
             >
               <Tab label="SIGN IN" {...a11yProps(0)} />
               <Tab label="SIGN UP" {...a11yProps(1)} />

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    backgroundColor: "#f44336",
+    backgroundColor: "#063970",
     color: "white",
   },
 }));
@@ -71,7 +71,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (token) {
-      navigate("/home");
+      navigate("portal/jobs");
     }
   }, [token, navigate]);
 
@@ -135,7 +135,7 @@ const SignIn = () => {
       </form>
       <Box textAlign="center" className={classes.margin}>
         <NavLink style={{ textDecoration: "none" }} to="/register">
-          <Button variant="text">Don't have an account?Please register</Button>
+          <Button variant="text">Don't have an account? Please register</Button>
         </NavLink>
       </Box>
     </Grid>
