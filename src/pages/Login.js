@@ -6,7 +6,7 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import { AppBar, Grid, Paper } from "@material-ui/core";
+import { AppBar, Grid, Paper, Typography } from "@material-ui/core";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,6 +55,18 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     margin: theme.spacing(2),
   },
+  img: {
+    textAlign: "center",
+    margin: theme.spacing(2),
+  },
+  imgTitle: {
+    color: "#063970",
+  },
+  typo: {
+    textAlign: "center",
+    marginTop: theme.spacing(5),
+    color: "#063970",
+  },
 }));
 
 export default function Login() {
@@ -96,7 +108,21 @@ export default function Login() {
           </TabPanel>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Box className={classes.img}>
+            <img
+              height="80%"
+              width="60%"
+              src="https://techforing.com/tfimg/logo.png"
+            />
+            <Typography className={classes.imgTitle} variant="subtitle1">
+              Shaping Tomorrow's Cybersecurity
+            </Typography>
+          </Box>
+          <Box className={classes.header}>
+            <Typography className={classes.typo} variant="h3">
+              Welcome to Techforing
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
     </div>

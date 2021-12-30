@@ -14,6 +14,7 @@ import Drawer from "./Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signoutUser } from "../features/AuthSlice";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -135,9 +136,14 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
-            TechForing
-          </Typography>
+          <Box>
+            <Typography variant="h6" noWrap>
+              TechForing
+            </Typography>
+            <Typography variant="subtitle2">
+              Shaping Tomorrow's Cybersecurity
+            </Typography>
+          </Box>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
