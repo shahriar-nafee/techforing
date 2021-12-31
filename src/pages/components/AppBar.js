@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: "#063970",
   },
   // title: {
   //   display: "none",

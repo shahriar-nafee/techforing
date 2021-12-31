@@ -44,7 +44,6 @@ const AuthSlice = createSlice({
   extraReducers: {
     [loginUser.fulfilled]: (state, action) => {
       const { data } = action.payload;
-      console.log(data);
       state.loading = false;
       state.token = data.access;
       if (data) {

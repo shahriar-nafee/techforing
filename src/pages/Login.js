@@ -44,7 +44,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     margin: theme.spacing(5),
+
     backgroundColor: theme.palette.background.paper,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(20),
+    },
   },
   border: {
     backgroundColor: "light",

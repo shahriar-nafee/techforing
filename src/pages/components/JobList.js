@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { useGetAllJobsQuery } from "../features/JoblistApi";
 import {
+  AppBar,
   Box,
   Button,
+  Card,
+  CardContent,
+  Grid,
+  IconButton,
   LinearProgress,
   makeStyles,
   Modal,
@@ -13,11 +18,30 @@ import EditIcon from "@material-ui/icons/Edit";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
+import WorkIcon from "@material-ui/icons/Work";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 
 const useStyles = makeStyles((theme) => ({
-  header: {
+  grid: {
+    flexGrow: 1,
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(5),
+  },
+  card: {
+    backgroundColor: "#063970",
+    color: "white",
+  },
+  cardContent: {
+    color: "white",
+    overflow: "hidden",
+  },
+  cardTypo: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconGap: {
+    marginRight: theme.spacing(1),
   },
   typo: {
     textAlign: "center",
@@ -28,6 +52,14 @@ const useStyles = makeStyles((theme) => ({
   createButton: {
     textAlign: "right",
   },
+
+  th: {
+    backgroundColor: "#063970",
+    color: "white",
+    textAlign: "center",
+    fontSize: "20px",
+    padding: theme.spacing(2),
+  },
 }));
 
 const columns = [
@@ -35,7 +67,7 @@ const columns = [
     field: "jobTitle",
     headerName: "Post Name",
     // width: 150,
-    flex: 1.5,
+    flex: 1.3,
   },
   {
     field: "jobType",
@@ -76,38 +108,37 @@ const columns = [
     field: "edit",
     headerName: "Edit",
     sortable: false,
-    // width: 100,
-    flex: 1,
+    width: 130,
+    // flex: 1,
     disableClickEventBubbling: true,
     renderCell: () => {
       return (
         <>
           {" "}
-          <Button>
+          <IconButton size="small">
             <EditIcon
+              fontSize="small"
               style={{
                 color: "green",
               }}
             />
-          </Button>
-          <Button
-            startIcon={
-              <DeleteIcon
-                style={{
-                  color: "red",
-                }}
-              />
-            }
-          ></Button>
-          <Button
-            startIcon={
-              <VisibilityIcon
-                style={{
-                  color: "DodgerBlue	",
-                }}
-              />
-            }
-          ></Button>
+          </IconButton>
+          <IconButton size="small">
+            <DeleteIcon
+              fontSize="small"
+              style={{
+                color: "red",
+              }}
+            />
+          </IconButton>
+          <IconButton size="small">
+            <VisibilityIcon
+              fontSize="small"
+              style={{
+                color: "DodgerBlue	",
+              }}
+            />
+          </IconButton>
         </>
       );
     },
@@ -129,12 +160,63 @@ export default function DataTable() {
 
   return (
     <div style={{ width: "100%" }}>
-      <Box className={classes.header}>
-        <Typography className={classes.typo} variant="h5">
-          RECENT JOB POST
-        </Typography>
-      </Box>
-
+      <div className={classes.grid}>
+        <Grid container spacing={8}>
+          <Grid item xs={6} sm={3}>
+            <Card className={classes.card}>
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom className={classes.cardTypo}>
+                  {" "}
+                  <WorkIcon className={classes.iconGap} />
+                  TOTAL ACTIVE JOB
+                </Typography>
+                <Typography variant="h5" className={classes.typo}>
+                  5
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Card className={classes.card}>
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom className={classes.cardTypo}>
+                  <PeopleAltIcon className={classes.iconGap} />
+                  INTERVIEW SCHEDULE
+                </Typography>
+                <Typography variant="h5" className={classes.typo}>
+                  200
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Card className={classes.card}>
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom className={classes.cardTypo}>
+                  <PeopleAltIcon className={classes.iconGap} />
+                  NEW HIRING
+                </Typography>
+                <Typography variant="h5" className={classes.typo}>
+                  5
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Card className={classes.card}>
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom className={classes.cardTypo}>
+                  <PeopleAltIcon className={classes.iconGap} />
+                  TOTAL APPLICANTS
+                </Typography>
+                <Typography variant="h5" className={classes.typo}>
+                  200
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </div>
       <Box className={classes.createButton}>
         <Button
           style={{
@@ -159,14 +241,21 @@ export default function DataTable() {
         <>hello world</>
       </Modal>
       {data && (
-        <DataGrid
-          autoHeight
-          rows={data}
-          columns={columns}
-          pageSize={8}
-          checkboxSelection
-          disableSelectionOnClick
-        />
+        <>
+          <AppBar position="static" className={classes.th}>
+            <Typography variant="h5" noWrap>
+              RECENT JOB POST
+            </Typography>
+          </AppBar>
+          <DataGrid
+            autoHeight
+            rows={data}
+            columns={columns}
+            rowsPerPage={2}
+            checkboxSelection
+            disableSelectionOnClick
+          />
+        </>
       )}
     </div>
   );
