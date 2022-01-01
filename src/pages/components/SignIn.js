@@ -94,6 +94,7 @@ const SignIn = () => {
       )}
       <form onSubmit={handleSigninSubmit}>
         <TextField
+          required
           className={classes.margin}
           type="email"
           label="Email"
@@ -111,6 +112,7 @@ const SignIn = () => {
           }}
         />
         <TextField
+          required
           className={classes.margin}
           label="Password"
           type="password"

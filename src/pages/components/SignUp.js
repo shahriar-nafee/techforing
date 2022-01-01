@@ -166,7 +166,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              type="number"
+              type="tel"
               label="Phone Number"
               id="phone_number"
               name="phone_number"

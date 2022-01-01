@@ -10,7 +10,6 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import Drawer from "./Drawer";
 import { useDispatch } from "react-redux";
 import { signoutUser } from "../features/AuthSlice";
 import { Box } from "@material-ui/core";
@@ -23,12 +22,6 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor: "#063970",
   },
-  // title: {
-  //   display: "none",
-  //   [theme.breakpoints.up("sm")]: {
-  //     display: "block",
-  //   },
-  // },
 
   sectionDesktop: {
     display: "none",
@@ -167,7 +160,6 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer />
       {renderMobileMenu}
       {renderMenu}
     </div>

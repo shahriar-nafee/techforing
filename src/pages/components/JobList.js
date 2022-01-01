@@ -20,6 +20,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import WorkIcon from "@material-ui/icons/Work";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import CreateForm from "./CreateForm";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -238,7 +239,7 @@ export default function DataTable() {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <>hello world</>
+        <CreateForm handleClose={handleClose} />
       </Modal>
       {data && (
         <>
