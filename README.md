@@ -18,7 +18,7 @@ App that lists Available Jobs with React and Redux-toolkit.
 ## How to Run
 
 1. Clone Project - [https://github.com/shahriar-nafee/techforing.git](https://github.com/shahriar-nafee/techforing.git)
-2. Go to the project directory by cd technext-spaceX
+2. Go to the project directory by cd techforing
 3. Run command “npm i” to install all necessary dependencies
 4. Run the project – “npm start”
 
