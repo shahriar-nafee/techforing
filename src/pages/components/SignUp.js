@@ -31,12 +31,9 @@ const genderList = [
 ];
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   header: {
-    marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(8),
+    marginTop: theme.spacing(7),
+    marginBottom: theme.spacing(7),
   },
   typo: {
     textAlign: "center",
@@ -49,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     marginTop: theme.spacing(2),
+    flexGrow: 1,
   },
   button: {
     backgroundColor: "#063970",
@@ -121,7 +119,7 @@ function SignUp() {
     setSuccess("");
   }, []);
   return (
-    <div className={classes.root}>
+    <Box>
       <Box className={classes.header}>
         <Typography className={classes.typo} variant="h5">
           SIGN UP
@@ -144,6 +142,7 @@ function SignUp() {
           </Alert>
         </div>
       )}
+
       <form onSubmit={handleSignupSubmit}>
         <Grid container spacing={3} className={classes.form}>
           <Grid item xs={6}>
@@ -287,7 +286,7 @@ function SignUp() {
           </Button>
         </Box>
       </form>
-    </div>
+    </Box>
   );
 }
 

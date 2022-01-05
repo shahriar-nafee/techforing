@@ -54,11 +54,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "light",
     boxShadow: "0 1px 2px 1px #063970",
   },
-  paper: {
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    margin: theme.spacing(2),
-  },
   img: {
     textAlign: "center",
     margin: theme.spacing(2),
@@ -83,38 +78,32 @@ export default function Login() {
 
   return (
     <div className={classes.root}>
-      <Grid container>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          container
-          justifyContent="center"
-          className={classes.border}
-        >
-          <AppBar position="static" color="default">
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="simple tabs example"
-              // className={classes.paper}
-              variant="fullWidth"
-              TabIndicatorProps={{
-                style: {
-                  backgroundColor: "#063970",
-                },
-              }}
-            >
-              <Tab label="SIGN IN" {...a11yProps(0)} />
-              <Tab label="SIGN UP" {...a11yProps(1)} />
-            </Tabs>
-          </AppBar>
-          <TabPanel value={value} index={0}>
-            <SignIn />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <SignUp />
-          </TabPanel>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} container justifyContent="center">
+          <Box className={classes.border}>
+            <AppBar position="static" color="default">
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="simple tabs example"
+                variant="fullWidth"
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: "#063970",
+                  },
+                }}
+              >
+                <Tab label="SIGN IN" {...a11yProps(0)} />
+                <Tab label="SIGN UP" {...a11yProps(1)} />
+              </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+              <SignIn />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <SignUp />
+            </TabPanel>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Box className={classes.img}>

@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Grid,
   InputAdornment,
   makeStyles,
   TextField,
@@ -76,7 +75,7 @@ const SignIn = () => {
   }, [token, navigate]);
 
   return (
-    <Grid>
+    <Box>
       <Box className={classes.header}>
         <Typography className={classes.typo} variant="h5">
           SIGN IN
@@ -140,7 +139,7 @@ const SignIn = () => {
           <Button variant="text">Don't have an account? Please register</Button>
         </NavLink>
       </Box>
-    </Grid>
+    </Box>
   );
 };
 

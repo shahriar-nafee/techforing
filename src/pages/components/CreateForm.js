@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     margin: "auto",
     [theme.breakpoints.down("sm")]: {
+      height: "100%",
       width: "100vw",
-      height: "100vh",
     },
   },
   cancel: {
@@ -204,7 +204,7 @@ function CreateForm({ handleClose }) {
               </Box>
               <Box className={classes.formRow}>
                 <Grid item xs={4} sm={3}>
-                  <Typography variant="h6">Last Date Of Apply:</Typography>
+                  <Typography variant="h6">Expiry Date:</Typography>
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
