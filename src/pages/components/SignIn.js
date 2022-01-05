@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   InputAdornment,
   makeStyles,
   TextField,
@@ -32,9 +33,21 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  buttonWrapper: {
+    margin: theme.spacing(1),
+    position: "relative",
+  },
   button: {
     backgroundColor: "#063970",
     color: "white",
+  },
+  buttonProgress: {
+    color: "#063970",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12,
   },
 }));
 
@@ -42,7 +55,7 @@ const SignIn = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, logInError } = useSelector((state) => state.auth);
+  const { token, logInError, loading } = useSelector((state) => state.auth);
 
   const [signinData, setSigninData] = useState({
     email: "",
@@ -128,10 +141,18 @@ const SignIn = () => {
             ),
           }}
         />
-        <Box textAlign="center">
-          <Button className={classes.button} variant="contained" type="submit">
+        <Box textAlign="center" className={classes.buttonWrapper}>
+          <Button
+            className={classes.button}
+            disabled={loading}
+            variant="contained"
+            type="submit"
+          >
             SIGN IN
           </Button>
+          {loading && (
+            <CircularProgress size={24} className={classes.buttonProgress} />
+          )}
         </Box>
       </form>
       <Box textAlign="center" className={classes.margin}>

@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import { createJob } from "../features/JobSlice";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,21 +57,70 @@ const useStyles = makeStyles((theme) => ({
 
 const shiftList = [
   {
-    value: "Day",
+    value: "day",
     label: "Day",
   },
   {
-    value: "Night",
+    value: "night",
     label: "Night",
+  },
+];
+
+const jobTypeList = [
+  {
+    value: "part_time",
+    label: "Part Time",
+  },
+  {
+    value: "full_time",
+    label: "Full Time",
+  },
+  {
+    value: "internship",
+    label: "Internship",
   },
 ];
 
 function CreateForm({ handleClose }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [shift, setShift] = useState();
+  const [jobType, setJobType] = useState();
+  const [formData, setFormData] = useState({
+    jobTitle: "",
+    lastDateOfApply: null,
+    level: "",
+    shift: "null",
+    location: "",
+    vacancies: "",
+    jobType: "",
+    jobDescription: "",
+  });
+
+  const handleFormInput = (e) => {
+    const newData = { ...formData };
+    newData[e.target.name] = e.target.value;
+    setFormData(newData);
+  };
+
+  console.log(formData);
 
   const handleChange = (event) => {
     setShift(event.target.value);
+  };
+
+  const handleChangeJobType = (event) => {
+    setJobType(event.target.value);
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(createJob(formData));
+    } catch {
+      alert();
+    }
   };
   return (
     <Box className={classes.container}>
@@ -88,7 +139,7 @@ function CreateForm({ handleClose }) {
           CREATE JOB
         </Typography>
         <div className={classes.form}>
-          <form>
+          <form onSubmit={handleFormSubmit}>
             <Grid container spacing={3}>
               <Box className={classes.formRow}>
                 <Grid item xs={4} sm={3}>
@@ -100,7 +151,7 @@ function CreateForm({ handleClose }) {
                     type="text"
                     id="jobTitle"
                     name="jobTitle"
-                    //   onChange={(e) => handleSigninInput(e)}
+                    onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -118,7 +169,7 @@ function CreateForm({ handleClose }) {
                     select
                     value={shift}
                     onChange={handleChange}
-                    //   onClick={(e) => handleSignupInput(e)}
+                    onClick={(e) => handleFormInput(e)}
                     SelectProps={{
                       native: true,
                     }}
@@ -144,7 +195,7 @@ function CreateForm({ handleClose }) {
                     type="text"
                     id="level"
                     name="level"
-                    //   onChange={(e) => handleSigninInput(e)}
+                    onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -161,7 +212,7 @@ function CreateForm({ handleClose }) {
                     type="number"
                     id="vacancies"
                     name="vacancies"
-                    //   onChange={(e) => handleSigninInput(e)}
+                    onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -174,15 +225,25 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
-                    className={classes.margin}
-                    type="text"
                     id="jobType"
                     name="jobType"
-                    //   onChange={(e) => handleSigninInput(e)}
+                    select
+                    value={jobType}
+                    onChange={handleChangeJobType}
+                    onClick={(e) => handleFormInput(e)}
+                    SelectProps={{
+                      native: true,
+                    }}
                     variant="outlined"
                     fullWidth
                     size="small"
-                  />
+                  >
+                    {jobTypeList.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
                 </Grid>
               </Box>
               <Box className={classes.formRow}>
@@ -195,7 +256,7 @@ function CreateForm({ handleClose }) {
                     type="text"
                     id="location"
                     name="location"
-                    //   onChange={(e) => handleSigninInput(e)}
+                    onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -212,7 +273,7 @@ function CreateForm({ handleClose }) {
                     type="date"
                     id="lastDateOfApply"
                     name="lastDateOfApply"
-                    //   onChange={(e) => handleSigninInput(e)}
+                    onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -229,7 +290,7 @@ function CreateForm({ handleClose }) {
                     type="tel"
                     id="jobDescription"
                     name="jobDescription"
-                    //   onChange={(e) => handleSigninInput(e)}
+                    onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
                     multiline
