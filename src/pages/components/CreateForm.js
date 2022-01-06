@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Grid,
   IconButton,
   makeStyles,
@@ -11,6 +12,7 @@ import React, { useState } from "react";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import { createJob } from "../features/JobSlice";
 import { useDispatch } from "react-redux";
+import { useAddJobMutation } from "../features/JoblistApi";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -48,10 +50,22 @@ const useStyles = makeStyles((theme) => ({
     width: "100vh",
     margin: theme.spacing(1),
   },
+  buttonWrapper: {
+    margin: theme.spacing(1),
+    position: "relative",
+  },
   button: {
     backgroundColor: "#063970",
     color: "white",
     marginTop: theme.spacing(3),
+  },
+  buttonProgress: {
+    color: "#063970",
+    position: "absolute",
+    top: "70%",
+    right: "4%",
+    marginTop: -12,
+    marginLeft: -12,
   },
 }));
 
@@ -84,6 +98,7 @@ const jobTypeList = [
 function CreateForm({ handleClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [addJob, { isLoading }] = useAddJobMutation();
   const [shift, setShift] = useState();
   const [jobType, setJobType] = useState();
   const [formData, setFormData] = useState({
@@ -117,7 +132,7 @@ function CreateForm({ handleClose }) {
     e.preventDefault();
 
     try {
-      await dispatch(createJob(formData));
+      await addJob(formData);
     } catch {
       alert();
     }
@@ -305,14 +320,21 @@ function CreateForm({ handleClose }) {
 
               {/* </Grid> */}
             </Grid>
-            <Box textAlign="right">
+            <Box textAlign="right" className={classes.buttonWrapper}>
               <Button
                 className={classes.button}
+                disabled={isLoading}
                 variant="contained"
                 type="submit"
               >
-                Save
+                SAVE
               </Button>
+              {isLoading && (
+                <CircularProgress
+                  size={24}
+                  className={classes.buttonProgress}
+                />
+              )}
             </Box>
           </form>
         </div>

@@ -18,8 +18,17 @@ export const JoblistApi = createApi({
   endpoints: (builder) => ({
     getAllJobs: builder.query({
       query: () => "job_post",
+      providesTags: ["Post"],
+    }),
+    addJob: builder.mutation({
+      query: (body) => ({
+        url: "job_post/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Post"],
     }),
   }),
 });
 
-export const { useGetAllJobsQuery } = JoblistApi;
+export const { useGetAllJobsQuery, useAddJobMutation } = JoblistApi;
