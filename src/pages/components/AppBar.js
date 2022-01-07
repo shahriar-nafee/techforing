@@ -122,12 +122,10 @@ export default function PrimarySearchAppBar() {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Box>
-            <Typography variant="h6" noWrap>
-              TechForing
+            <Typography variant="h5" noWrap>
+              Job-Portal
             </Typography>
-            <Typography variant="subtitle2">
-              Shaping Tomorrow's Cybersecurity
-            </Typography>
+            {/* <Typography variant="subtitle2">Get Your Job</Typography> */}
           </Box>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

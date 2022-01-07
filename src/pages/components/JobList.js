@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridCellParams } from "@material-ui/data-grid";
 import { useGetAllJobsQuery } from "../features/JoblistApi";
 import {
   AppBar,
@@ -21,6 +21,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import WorkIcon from "@material-ui/icons/Work";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import CreateForm from "./CreateForm";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -112,7 +113,17 @@ const columns = [
     width: 130,
     // flex: 1,
     disableClickEventBubbling: true,
-    renderCell: () => {
+
+    renderCell: (params) => {
+      // const navigate = useNavigate();
+      // const onClickView = async () => {
+      //   // const navigate = useNavigate();
+      //   // alert(JSON.stringify(params.row, null, 4));
+      //   console.log(params.row);
+      //   // <Navigate to="/portal/jobs/id" replace={true} />;
+      //   // navigate(`jobs/${params.row.id}`, { state: { data: params.row } });
+      // };
+
       return (
         <>
           {" "}
@@ -132,7 +143,12 @@ const columns = [
               }}
             />
           </IconButton>
-          <IconButton size="small">
+          <IconButton
+            size="small"
+            onClick={() => {
+              <Navigate to="/portal/jobs/id" state={params.row} />;
+            }}
+          >
             <VisibilityIcon
               fontSize="small"
               style={{
@@ -159,6 +175,9 @@ export default function DataTable() {
     setOpen(false);
   };
 
+  const test = (params) => {
+    console.log(params);
+  };
   return (
     <div style={{ width: "100%" }}>
       <div className={classes.grid}>
@@ -255,9 +274,11 @@ export default function DataTable() {
             rowsPerPage={2}
             checkboxSelection
             disableSelectionOnClick
+            // onCellClick={test}
           />
         </>
       )}
+      <Outlet />
     </div>
   );
 }

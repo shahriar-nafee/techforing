@@ -13,6 +13,7 @@ import JobList from "./pages/components/JobList";
 import Mail from "./pages/components/Mail";
 import PrivateRoute from "./pages/components/PrivateRoute";
 import User from "./pages/components/User";
+import JobView from "./pages/components/JobView";
 
 function Main() {
   const { token } = useSelector((state) => state.auth);
@@ -30,6 +31,7 @@ function Main() {
         >
           <Route path="home" element={<HomePage />} />
           <Route path="jobs" element={<JobList />} />
+          <Route path="jobs/id" element={<JobView />} />
           <Route path="users" element={<User />} />
           <Route path="mails" element={<Mail />} />
         </Route>
