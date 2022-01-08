@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataGrid, GridCellParams } from "@material-ui/data-grid";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useGetAllJobsQuery } from "../features/JoblistApi";
 import {
   AppBar,
@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   Grid,
-  IconButton,
   LinearProgress,
   makeStyles,
   Modal,
@@ -21,7 +20,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import WorkIcon from "@material-ui/icons/Work";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import CreateForm from "./CreateForm";
-import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -64,105 +63,100 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const columns = [
-  {
-    field: "jobTitle",
-    headerName: "Post Name",
-    // width: 150,
-    flex: 1.3,
-  },
-  {
-    field: "jobType",
-    headerName: "Type",
-    // width: 120,
-    flex: 1,
-  },
-  {
-    field: "location",
-    headerName: "Location",
-    // width: 130,
-    flex: 1,
-    sortable: false,
-  },
+export default function DataTable() {
+  const columns = [
+    {
+      field: "jobTitle",
+      headerName: "Post Name",
+      // width: 150,
+      flex: 1.3,
+    },
+    {
+      field: "jobType",
+      headerName: "Type",
+      // width: 120,
+      flex: 1,
+    },
+    {
+      field: "location",
+      headerName: "Location",
+      // width: 130,
+      flex: 1,
+      sortable: false,
+    },
 
-  {
-    field: "shift",
-    headerName: "Shift",
-    // width: 120,
-    flex: 0.5,
-  },
-  {
-    field: "vacancies",
-    headerName: "Vacancies",
-    type: "number",
-    // width: 120,
-    flex: 0.5,
-    sortable: false,
-  },
-  {
-    field: "lastDateOfApply",
-    headerName: "Expire Date",
-    type: "number",
-    // width: 170,
-    flex: 1,
-  },
-  {
-    field: "edit",
-    headerName: "Edit",
-    sortable: false,
-    width: 130,
-    // flex: 1,
-    disableClickEventBubbling: true,
+    {
+      field: "shift",
+      headerName: "Shift",
+      // width: 120,
+      flex: 0.5,
+    },
+    {
+      field: "vacancies",
+      headerName: "Vacancies",
+      type: "number",
+      // width: 120,
+      flex: 0.5,
+      sortable: false,
+    },
+    {
+      field: "lastDateOfApply",
+      headerName: "Expire Date",
+      type: "number",
+      // width: 170,
+      flex: 1,
+    },
+    {
+      field: "edit",
+      headerName: "Edit",
+      sortable: false,
+      width: 130,
+      // flex: 1,
+      disableClickEventBubbling: true,
+      type: "actions",
 
-    renderCell: (params) => {
-      // const navigate = useNavigate();
-      // const onClickView = async () => {
-      //   // const navigate = useNavigate();
-      //   // alert(JSON.stringify(params.row, null, 4));
-      //   console.log(params.row);
-      //   // <Navigate to="/portal/jobs/id" replace={true} />;
-      //   // navigate(`jobs/${params.row.id}`, { state: { data: params.row } });
-      // };
-
-      return (
-        <>
-          {" "}
-          <IconButton size="small">
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={
             <EditIcon
               fontSize="small"
               style={{
                 color: "green",
               }}
             />
-          </IconButton>
-          <IconButton size="small">
+          }
+          label="Edit"
+          // onClick={deleteUser(params.id)}
+        />,
+        <GridActionsCellItem
+          icon={
             <DeleteIcon
               fontSize="small"
               style={{
                 color: "red",
               }}
             />
-          </IconButton>
-          <IconButton
-            size="small"
-            onClick={() => {
-              <Navigate to="/portal/jobs/id" state={params.row} />;
-            }}
-          >
+          }
+          label="Delete"
+          // onClick={deleteUser(params.id)}
+        />,
+        <GridActionsCellItem
+          icon={
             <VisibilityIcon
               fontSize="small"
               style={{
                 color: "DodgerBlue	",
               }}
             />
-          </IconButton>
-        </>
-      );
+          }
+          label="View"
+          onClick={() => onClickView(params)}
+        />,
+      ],
     },
-  },
-];
+  ];
 
-export default function DataTable() {
+  const navigate = useNavigate();
   const classes = useStyles();
   const { data, isLoading } = useGetAllJobsQuery();
   const [open, setOpen] = useState(false);
@@ -175,9 +169,10 @@ export default function DataTable() {
     setOpen(false);
   };
 
-  const test = (params) => {
-    console.log(params);
+  const onClickView = async (params) => {
+    navigate(`/portal/jobs/${params.id}`, { state: { state: params.row } });
   };
+
   return (
     <div style={{ width: "100%" }}>
       <div className={classes.grid}>
@@ -274,11 +269,9 @@ export default function DataTable() {
             rowsPerPage={2}
             checkboxSelection
             disableSelectionOnClick
-            // onCellClick={test}
           />
         </>
       )}
-      <Outlet />
     </div>
   );
 }

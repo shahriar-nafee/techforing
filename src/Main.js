@@ -31,7 +31,7 @@ function Main() {
         >
           <Route path="home" element={<HomePage />} />
           <Route path="jobs" element={<JobList />} />
-          <Route path="jobs/id" element={<JobView />} />
+          <Route path="jobs/:id" element={<JobView />} />
           <Route path="users" element={<User />} />
           <Route path="mails" element={<Mail />} />
         </Route>
