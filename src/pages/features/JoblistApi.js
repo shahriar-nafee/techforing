@@ -28,7 +28,15 @@ export const JoblistApi = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
+    deleteJob: builder.mutation({
+      query: (id) => ({
+        url: `job_update/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
-export const { useGetAllJobsQuery, useAddJobMutation } = JoblistApi;
+export const { useGetAllJobsQuery, useAddJobMutation, useDeleteJobMutation } =
+  JoblistApi;

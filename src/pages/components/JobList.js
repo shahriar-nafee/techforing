@@ -20,7 +20,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import WorkIcon from "@material-ui/icons/Work";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import CreateForm from "./CreateForm";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import DeleteJob from "./DeleteJob";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -138,7 +139,7 @@ export default function DataTable() {
             />
           }
           label="Delete"
-          // onClick={deleteUser(params.id)}
+          onClick={() => onDeleteUser(params.id)}
         />,
         <GridActionsCellItem
           icon={
@@ -160,6 +161,8 @@ export default function DataTable() {
   const classes = useStyles();
   const { data, isLoading } = useGetAllJobsQuery();
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [id, setId] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -169,8 +172,21 @@ export default function DataTable() {
     setOpen(false);
   };
 
+  const handleOpenDelete = () => {
+    setOpenDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
+  };
+
   const onClickView = async (params) => {
     navigate(`/portal/jobs/${params.id}`, { state: { state: params.row } });
+  };
+
+  const onDeleteUser = (id) => {
+    setId(id);
+    handleOpenDelete();
   };
 
   return (
@@ -254,6 +270,14 @@ export default function DataTable() {
         aria-describedby="simple-modal-description"
       >
         <CreateForm handleClose={handleClose} />
+      </Modal>
+      <Modal
+        open={openDelete}
+        onClose={handleCloseDelete}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <DeleteJob handleCloseDelete={handleCloseDelete} id={id} />
       </Modal>
       {data && (
         <>
