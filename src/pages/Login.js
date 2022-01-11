@@ -57,13 +57,14 @@ const useStyles = makeStyles((theme) => ({
   img: {
     textAlign: "center",
     margin: theme.spacing(2),
+    alignItems: "center",
   },
-  imgTitle: {
-    color: "#063970",
-  },
+  // imgTitle: {
+  //   color: "#063970",
+  // },
   typo: {
     textAlign: "center",
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(0),
     color: "#063970",
   },
 }));
@@ -108,18 +109,18 @@ export default function Login() {
         <Grid item xs={12} sm={6}>
           <Box className={classes.img}>
             <img
-              height="80%"
-              width="60%"
-              src="https://techforing.com/tfimg/logo.png"
+              // height="80%"
+              width="105%"
+              src="https://www.careersportal.co.za/sites/default/files/images/2018/TJP_logo.png"
               alt="logo"
             />
-            <Typography className={classes.imgTitle} variant="subtitle1">
+            {/* <Typography className={classes.imgTitle} variant="subtitle1">
               Shaping Tomorrow's Cybersecurity
-            </Typography>
+            </Typography> */}
           </Box>
           <Box className={classes.header}>
             <Typography className={classes.typo} variant="h3">
-              Welcome to Techforing
+              Welcome to Job-Portal
             </Typography>
           </Box>
         </Grid>
