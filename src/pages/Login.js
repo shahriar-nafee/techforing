@@ -56,8 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     textAlign: "center",
-    margin: theme.spacing(2),
-    alignItems: "center",
+    margin: theme.spacing(0),
   },
   // imgTitle: {
   //   color: "#063970",

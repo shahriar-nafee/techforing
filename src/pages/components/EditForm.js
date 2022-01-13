@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
-import { useAddJobMutation } from "../features/JoblistApi";
+import { useEditJobMutation } from "../features/JoblistApi";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -93,21 +93,12 @@ const jobTypeList = [
   },
 ];
 
-function CreateForm({ handleClose }) {
+function EditForm({ handleCloseEdit, data }) {
   const classes = useStyles();
-  const [addJob, { isLoading }] = useAddJobMutation();
+  const [editJob, { isLoading }] = useEditJobMutation();
   const [shift, setShift] = useState();
   const [jobType, setJobType] = useState();
-  const [formData, setFormData] = useState({
-    jobTitle: "",
-    lastDateOfApply: null,
-    level: "",
-    shift: "null",
-    location: "",
-    vacancies: "",
-    jobType: "",
-    jobDescription: "",
-  });
+  const [formData, setFormData] = useState(data);
 
   const handleFormInput = (e) => {
     const newData = { ...formData };
@@ -128,16 +119,16 @@ function CreateForm({ handleClose }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await addJob(formData);
-    } catch {
-      alert();
-    }
+    // try {
+    //   await addJob(formData);
+    // } catch {
+    //   alert();
+    // }
   };
   return (
     <Box className={classes.container}>
       <Box className={classes.cancel}>
-        <IconButton size="small" onClick={handleClose}>
+        <IconButton size="small" onClick={handleCloseEdit}>
           <CancelOutlinedIcon
             fontSize="small"
             style={{
@@ -148,7 +139,7 @@ function CreateForm({ handleClose }) {
       </Box>
       <Box>
         <Typography className={classes.header} variant="h5">
-          CREATE JOB
+          EDIT JOB
         </Typography>
         <div className={classes.form}>
           <form onSubmit={handleFormSubmit}>
@@ -163,6 +154,7 @@ function CreateForm({ handleClose }) {
                     type="text"
                     id="jobTitle"
                     name="jobTitle"
+                    value={formData.jobTitle}
                     onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
@@ -179,6 +171,7 @@ function CreateForm({ handleClose }) {
                     id="shift"
                     name="shift"
                     select
+                    defaultValue={formData.shift}
                     value={shift}
                     onChange={handleChange}
                     onClick={(e) => handleFormInput(e)}
@@ -207,6 +200,7 @@ function CreateForm({ handleClose }) {
                     type="text"
                     id="level"
                     name="level"
+                    value={formData.level}
                     onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
@@ -224,6 +218,7 @@ function CreateForm({ handleClose }) {
                     type="number"
                     id="vacancies"
                     name="vacancies"
+                    value={formData.vacancies}
                     onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
@@ -240,6 +235,7 @@ function CreateForm({ handleClose }) {
                     id="jobType"
                     name="jobType"
                     select
+                    defaultValue={formData.jobType}
                     value={jobType}
                     onChange={handleChangeJobType}
                     onClick={(e) => handleFormInput(e)}
@@ -268,6 +264,7 @@ function CreateForm({ handleClose }) {
                     type="text"
                     id="location"
                     name="location"
+                    value={formData.location}
                     onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
@@ -285,6 +282,7 @@ function CreateForm({ handleClose }) {
                     type="date"
                     id="lastDateOfApply"
                     name="lastDateOfApply"
+                    value={formData.lastDateOfApply}
                     onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
@@ -302,6 +300,7 @@ function CreateForm({ handleClose }) {
                     type="tel"
                     id="jobDescription"
                     name="jobDescription"
+                    value={formData.jobDescription}
                     onChange={(e) => handleFormInput(e)}
                     variant="outlined"
                     fullWidth
@@ -324,7 +323,7 @@ function CreateForm({ handleClose }) {
                 variant="contained"
                 type="submit"
               >
-                SAVE
+                UPDATE
               </Button>
               {isLoading && (
                 <CircularProgress
@@ -340,4 +339,4 @@ function CreateForm({ handleClose }) {
   );
 }
 
-export default CreateForm;
+export default EditForm;

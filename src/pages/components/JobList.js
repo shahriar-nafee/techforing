@@ -22,6 +22,7 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import CreateForm from "./CreateForm";
 import { useNavigate } from "react-router-dom";
 import DeleteJob from "./DeleteJob";
+import EditForm from "./EditForm";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -127,7 +128,7 @@ export default function DataTable() {
             />
           }
           label="Edit"
-          // onClick={deleteUser(params.id)}
+          onClick={() => onClickEdit(params.row)}
         />,
         <GridActionsCellItem
           icon={
@@ -139,7 +140,7 @@ export default function DataTable() {
             />
           }
           label="Delete"
-          onClick={() => onDeleteUser(params.id)}
+          onClick={() => onClickDelete(params.id)}
         />,
         <GridActionsCellItem
           icon={
@@ -161,8 +162,10 @@ export default function DataTable() {
   const classes = useStyles();
   const { data, isLoading } = useGetAllJobsQuery();
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [id, setId] = useState("");
+  const [editData, setEditData] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -172,6 +175,13 @@ export default function DataTable() {
     setOpen(false);
   };
 
+  const handleOpenEdit = () => {
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
   const handleOpenDelete = () => {
     setOpenDelete(true);
   };
@@ -184,9 +194,13 @@ export default function DataTable() {
     navigate(`/portal/jobs/${params.id}`, { state: { state: params.row } });
   };
 
-  const onDeleteUser = (id) => {
+  const onClickDelete = (id) => {
     setId(id);
     handleOpenDelete();
+  };
+  const onClickEdit = (data) => {
+    setEditData(data);
+    handleOpenEdit();
   };
 
   return (
@@ -270,6 +284,14 @@ export default function DataTable() {
         aria-describedby="simple-modal-description"
       >
         <CreateForm handleClose={handleClose} />
+      </Modal>
+      <Modal
+        open={openEdit}
+        onClose={handleCloseEdit}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <EditForm handleCloseEdit={handleCloseEdit} data={editData} />
       </Modal>
       <Modal
         open={openDelete}

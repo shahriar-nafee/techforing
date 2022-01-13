@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useDeleteJobMutation } from "../features/JoblistApi";
 
 const style = {
@@ -14,16 +14,7 @@ const style = {
 };
 
 function DeleteJob({ id, handleCloseDelete }) {
-  //   const [openDelete, setOpenDelete] = useState(true);
-
-  //   const handleOpenDelete = () => {
-  //     setOpenDelete(true);
-  //   };
-
-  //   const handleCloseDelete = () => {
-  //     setOpenDelete(false);
-  //   };
-  const [deleteJob, { isLoading }] = useDeleteJobMutation();
+  const [deleteJob] = useDeleteJobMutation();
 
   const handleNo = () => {
     handleCloseDelete();
@@ -41,14 +32,6 @@ function DeleteJob({ id, handleCloseDelete }) {
   };
   return (
     <>
-      {/* <Modal
-        open={openDelete}
-        onClose={handleCloseDelete}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      > */}
-      {/* <DeleteJob handleCloseDelete={handleCloseDelete} /> */}
-
       <Box sx={style}>
         <Typography
           textAlign="center"
@@ -67,7 +50,6 @@ function DeleteJob({ id, handleCloseDelete }) {
           </Button>
         </Box>
       </Box>
-      {/* </Modal> */}
     </>
   );
 }
