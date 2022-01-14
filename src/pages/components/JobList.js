@@ -109,8 +109,8 @@ export default function DataTable() {
       flex: 1,
     },
     {
-      field: "edit",
-      headerName: "Edit",
+      field: "actions",
+      headerName: "Actions",
       sortable: false,
       width: 130,
       // flex: 1,

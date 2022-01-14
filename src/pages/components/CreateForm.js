@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import { useAddJobMutation } from "../features/JoblistApi";
 
@@ -95,7 +95,7 @@ const jobTypeList = [
 
 function CreateForm({ handleClose }) {
   const classes = useStyles();
-  const [addJob, { isLoading }] = useAddJobMutation();
+  const [addJob, { isLoading, isSuccess }] = useAddJobMutation();
   const [shift, setShift] = useState();
   const [jobType, setJobType] = useState();
   const [formData, setFormData] = useState({
@@ -115,8 +115,6 @@ function CreateForm({ handleClose }) {
     setFormData(newData);
   };
 
-  console.log(formData);
-
   const handleChange = (event) => {
     setShift(event.target.value);
   };
@@ -134,6 +132,13 @@ function CreateForm({ handleClose }) {
       alert();
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      handleClose();
+    }
+  }, [isSuccess, handleClose]);
+
   return (
     <Box className={classes.container}>
       <Box className={classes.cancel}>

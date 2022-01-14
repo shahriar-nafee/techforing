@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import { useEditJobMutation } from "../features/JoblistApi";
 
@@ -95,7 +95,7 @@ const jobTypeList = [
 
 function EditForm({ handleCloseEdit, data }) {
   const classes = useStyles();
-  const [editJob, { isLoading }] = useEditJobMutation();
+  const [editJob, { isLoading, isSuccess }] = useEditJobMutation();
   const [shift, setShift] = useState();
   const [jobType, setJobType] = useState();
   const [formData, setFormData] = useState(data);
@@ -123,6 +123,13 @@ function EditForm({ handleCloseEdit, data }) {
       alert();
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      handleCloseEdit();
+    }
+  }, [isSuccess, handleCloseEdit]);
+
   return (
     <Box className={classes.container}>
       <Box className={classes.cancel}>
