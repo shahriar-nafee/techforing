@@ -29,11 +29,14 @@ export const JoblistApi = createApi({
       invalidatesTags: ["Post"],
     }),
     editJob: builder.mutation({
-      query: ({ id, ...rest }) => ({
-        url: `job_update/${id}`,
-        method: "PUT",
-        body: rest,
-      }),
+      query(data) {
+        const { id, ...body } = data;
+        return {
+          url: `job_update/${id}/`,
+          method: "PUT",
+          body,
+        };
+      },
       invalidatesTags: ["Post"],
     }),
     deleteJob: builder.mutation({

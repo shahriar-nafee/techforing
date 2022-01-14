@@ -106,8 +106,6 @@ function EditForm({ handleCloseEdit, data }) {
     setFormData(newData);
   };
 
-  console.log(formData);
-
   const handleChange = (event) => {
     setShift(event.target.value);
   };
@@ -119,11 +117,11 @@ function EditForm({ handleCloseEdit, data }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // try {
-    //   await addJob(formData);
-    // } catch {
-    //   alert();
-    // }
+    try {
+      await editJob(formData);
+    } catch {
+      alert();
+    }
   };
   return (
     <Box className={classes.container}>
