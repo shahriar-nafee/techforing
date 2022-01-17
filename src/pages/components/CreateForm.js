@@ -102,7 +102,7 @@ function CreateForm({ handleClose }) {
     jobTitle: "",
     lastDateOfApply: null,
     level: "",
-    shift: "null",
+    shift: "day",
     location: "",
     vacancies: "",
     jobType: "",
@@ -164,6 +164,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     className={classes.margin}
                     type="text"
                     id="jobTitle"
@@ -181,6 +182,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     id="shift"
                     name="shift"
                     select
@@ -208,6 +210,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     className={classes.margin}
                     type="text"
                     id="level"
@@ -225,6 +228,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     className={classes.margin}
                     type="number"
                     id="vacancies"
@@ -242,6 +246,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     id="jobType"
                     name="jobType"
                     select
@@ -269,6 +274,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     className={classes.margin}
                     type="text"
                     id="location"
@@ -286,6 +292,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     className={classes.margin}
                     type="date"
                     id="lastDateOfApply"
@@ -303,6 +310,7 @@ function CreateForm({ handleClose }) {
                 </Grid>
                 <Grid item xs={8} sm={9}>
                   <TextField
+                    required
                     className={classes.margin}
                     type="tel"
                     id="jobDescription"

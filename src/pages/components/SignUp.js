@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import {
   Box,
   Button,
+  CircularProgress,
   InputAdornment,
   TextField,
   Typography,
@@ -31,6 +32,9 @@ const genderList = [
 ];
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    maxWidth: 510,
+  },
   header: {
     marginTop: theme.spacing(7),
     marginBottom: theme.spacing(7),
@@ -48,10 +52,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     flexGrow: 1,
   },
+  buttonWrapper: {
+    margin: theme.spacing(1),
+    position: "relative",
+  },
   button: {
     backgroundColor: "#063970",
     color: "white",
     marginTop: theme.spacing(3),
+  },
+  buttonProgress: {
+    color: "#063970",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    // marginTop: -12,
+    marginLeft: -12,
   },
 }));
 
@@ -71,7 +87,7 @@ function SignUp() {
   const [warning, setWarning] = useState();
   const [success, setSuccess] = useState();
 
-  const { signUpError, message } = useSelector((state) => state.auth);
+  const { signUpError, message, loading } = useSelector((state) => state.auth);
 
   const handleSignupInput = (e) => {
     const newData = { ...signupData };
@@ -119,7 +135,7 @@ function SignUp() {
     setSuccess("");
   }, []);
   return (
-    <Box>
+    <Box className={classes.container}>
       <Box className={classes.header}>
         <Typography className={classes.typo} variant="h5">
           SIGN UP
@@ -147,6 +163,7 @@ function SignUp() {
         <Grid container spacing={3} className={classes.form}>
           <Grid item xs={6}>
             <TextField
+              required
               label="Name"
               id="full_name"
               name="full_name"
@@ -165,6 +182,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              required
               type="tel"
               label="Phone Number"
               id="phone_number"
@@ -184,6 +202,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              required
               type="date"
               label="Date Of Birth"
               id="birthDate"
@@ -199,6 +218,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              required
               id="gender"
               name="gender"
               select
@@ -221,6 +241,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              required
               className={classes.margin}
               type="email"
               label="Email"
@@ -241,6 +262,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              required
               className={classes.margin}
               label="Password"
               type="password"
@@ -261,6 +283,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={6}>
             <TextField
+              required
               className={classes.margin}
               label="Confirm Password"
               type="password"
@@ -280,10 +303,18 @@ function SignUp() {
             />
           </Grid>
         </Grid>
-        <Box textAlign="center">
-          <Button className={classes.button} variant="contained" type="submit">
+        <Box textAlign="center" className={classes.buttonWrapper}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            type="submit"
+            disabled={loading}
+          >
             SIGN UP
           </Button>
+          {loading && (
+            <CircularProgress size={24} className={classes.buttonProgress} />
+          )}
         </Box>
       </form>
     </Box>
